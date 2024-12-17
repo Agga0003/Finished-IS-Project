@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dot Game</title>
+  <a href="../index.html"> Home</a>
+    <br>
+    <br>
+    <br>
+  <a href="Baldeagle.html"> Go back to Bald Eagles </a>
+  <style>
+    body 
+  
+    
+    {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    #game-container {
+      position: relative;
+      width: 800;
+      height: 800;
+      background: #f0f0f0;
+    }
+
+    .dot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #scoreboard {
+      position: fixed;
+      top: 100px;
+      left: 10px;
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+
+    #game-over {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+  <div id="scoreboard">Score: <span id="score">0</span></div>
+  <div id="game-over">
+    <h1>Game Over</h1>
+    <p>Your score: <span id="final-score">0</span></p>
+    <button onclick="restartGame()">Restart</button>
+  </div>
+  <script>
+    const container = document.getElementById('game-container');
+    const scoreDisplay = document.getElementById('score');
+    const gameOverDisplay = document.getElementById('game-over');
+    const finalScore = document.getElementById('final-score');
+    
+    let score = 0;
+    let timer;
+    const gameTime = 30 * 1000; // 30 seconds
+
+    function createDot() {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+
+      // Random position
+      const x = Math.random() * (window.innerWidth - 30);
+      const y = Math.random() * (window.innerHeight - 30);
+
+      dot.style.left = `${x}px`;
+      dot.style.top = `${y}px`;
+
+      dot.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = score;
+        dot.remove();
+      });
+
+      container.appendChild(dot);
+
+      // Remove dot after 2 seconds if not clicked
+      setTimeout(() => dot.remove(), 2000);
+    }
+
+    function startGame() {
+      score = 0;
+      scoreDisplay.textContent = score;
+      gameOverDisplay.style.display = 'none';
+
+      timer = setInterval(() => {
+        createDot();
+      }, 800);
+
+      setTimeout(() => {
+        clearInterval(timer);
+        endGame();
+      }, gameTime);
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      gameOverDisplay.style.display = 'block';
+      finalScore.textContent = score;
+
+      // Remove all remaining dots
+      document.querySelectorAll('.dot').forEach(dot => dot.remove());
+    }
+
+    function restartGame() {
+      startGame();
+    }
+
+    // Start the game when the page loads
+    window.onload = startGame;
+  </script>
+</body>
+</html>

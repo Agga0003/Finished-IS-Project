@@ -1,0 +1,63 @@
+body{
+    background-color: rgb(6, 6, 103);
+    color; ;
+    font-family:'Lucida Sans';
+
+}
+h1, h2, h3, h4, h5, h6{
+    color: red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style:oblique
+}
+h6{
+   color: white; 
+}
+.main-content{
+    margin-left: 220px;
+    padding:20px;
+}
+.sidebar{
+    background-color: white;
+    width:200px;
+    height: 100%; 
+    left:0px;
+    padding:15px;
+    position: fixed;
+
+.sidebar ul{
+    list-style: none;
+    padding:0px; 
+}
+.sidebar ul li{
+    margin:15px 0;
+}
+.sidebar ul li a{
+    color: blue
+    text-decoration:none;
+}
+.sidebar ul li a:hover{
+    text-decoration:underline; 
+    color: red
+}
+
+}
+.navbar{
+    padding: 10px;
+    display:flex;
+    jsutify-content: space-around;
+    align-items: center;
+    color: whitesmoke;
+}
+.navbar a{
+    color: red
+}
+.navbar a:hover{
+    background-color:white
+    border: radius 5px;
+}
+.box-model{
+    padding: 15px;
+    background-color: red;
+    border: 5px solid whitesmoke; 
+    margin: 20px;
+}
